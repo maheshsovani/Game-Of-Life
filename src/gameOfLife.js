@@ -1,4 +1,5 @@
-const { zipper, validateNeighbours, contains } = require("./gameOfLifeUtil.js");
+const { zipper, validateNeighbours, contains } = require('./gameOfLifeUtil.js');
+const fs = require('fs');
 
 const findNeighboursOfCell = function(cell, bounds) {
   let xCoordinates = [cell[0] - 1, cell[0], cell[0] + 1];
@@ -12,11 +13,11 @@ const findNeighboursOfCell = function(cell, bounds) {
 };
 
 const findAllNeighbours = function(bounds) {
-  let limits = bounds["bottomRight"].concat(bounds["topLeft"]);
+  let limits = bounds['bottomRight'].concat(bounds['topLeft']);
   let allNeighbours = {};
   for (let row = limits[2]; row <= limits[0]; row++) {
     for (let column = limits[3]; column <= limits[1]; column++) {
-      allNeighbours["[" + row + ", " + column + "]"] = findNeighboursOfCell(
+      allNeighbours['[' + row + ', ' + column + ']'] = findNeighboursOfCell(
         [row, column],
         bounds
       );
@@ -77,9 +78,14 @@ const nextGeneration = function(currentGeneration, bounds) {
   return nextGen;
 };
 
+const saveGame = function(content) {
+  fs.writeFile('./gameData.json', content, () => {});
+};
+
 module.exports = {
   findNeighboursOfCell,
   findAllNeighbours,
   calculateAliveNeighbours,
-  nextGeneration
+  nextGeneration,
+  saveGame
 };

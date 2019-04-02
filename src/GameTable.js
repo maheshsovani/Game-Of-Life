@@ -15,6 +15,7 @@ class Table extends React.Component {
     this.getNextGeneration = this.getNextGeneration.bind(this);
     this.startGame = this.startGame.bind(this);
     this.stopGame = this.stopGame.bind(this);
+    this.saveGame = this.GameOfLife.saveGame.bind(this);
     this.state = { aliveCells: [] };
   }
 
